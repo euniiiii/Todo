@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: root
+    password: eun1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    mapper-locations: classpath:/mapper/*.xml
+    jdbc-url: jdbc:mysql://localhost:3306/todo_db?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  config-location: classpath:/mybatis/mybatis-config.xml
+
