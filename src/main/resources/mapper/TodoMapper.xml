@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.todo.mapper.TodoMapper">
+
+    <sql id="todoColumns">
+        title,
+        content,
+        is_complete,
+        created_at,
+        created_by,
+        modified_at,
+        modified_by
+    </sql>
+
+    <insert id="insertTodo" parameterType="com.example.todo.domain.Todo">
+        INSERT INTO todo(
+                <include refid="todoColumns"/>
+        ) VALUES (
+                  #{title},
+                  #{content},
+                  'n',
+                  NOW(),
+                  'EUN',
+                  NULL,
+                  NULL
+        )
+    </insert>
+
+    <select id="getTodoList" resultType="com.example.todo.domain.Todo">
+        SELECT *
+        FROM todo
+        ORDER BY id asc
+    </select>
+
+    <select id="getTodoById" parameterType="Long" resultType="com.example.todo.domain.Todo">
+        SELECT *
+        FROM todo
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateTodo">
+        UPDATE todo
+        <set>
+            modified_at = NOW(),
+            modified_by = 'MOON',
+            <if test="todo.title != null">title = #{todo.title},</if>
+            <if test="todo.content != null">content = #{todo.content},</if>
+            <if test="todo.isComplete != null">is_complete = #{todo.isComplete}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteTodo" parameterType="Long">
+        DELETE FROM todo WHERE id = #{id}
+    </delete>
+    
+</mapper>
