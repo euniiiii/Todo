@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Todo{
-    private Long id;
+    private long id;
     private String title;
     private String content;
-    private Boolean isComplete;
+    private String isComplete;
+
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime modifiedAt;
